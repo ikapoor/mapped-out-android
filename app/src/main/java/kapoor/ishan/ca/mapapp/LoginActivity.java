@@ -121,6 +121,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
         loginButton.setReadPermissions("email", "public_profile");
+
+
+        loginButton.setReadPermissions("email", "public_profile");
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -199,7 +202,6 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "updating UI for user with Email: " + user.getEmail(), Toast.LENGTH_SHORT ).show();
             Intent intent = new Intent(this, MapsActivity.class);
             startActivity(intent);
-
     }
 
 
@@ -240,6 +242,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void signInUser(String email, String password){
+
         if (email!=null&& password!=null && email.length()!=0 && password.length()!=0) {
             showLoading();
             firebaseAuth.signInWithEmailAndPassword(email, password)
