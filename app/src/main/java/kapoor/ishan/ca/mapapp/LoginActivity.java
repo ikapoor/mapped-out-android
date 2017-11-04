@@ -71,8 +71,6 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private Button signOutButton;
 
-
-    private Button btn;
     LoginButton loginButton;
     public static final String FIELDS_KEY = "fields";
     public static final String FIELDS = "first_name, last_name, email, id";
@@ -124,15 +122,8 @@ public class LoginActivity extends AppCompatActivity {
 
         loginButton.setReadPermissions("email", "public_profile");
 
-        btn = (Button) findViewById(R.id.btn);
-        btn.setOnClickListener(new View.OnClickListener(){
 
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
-                startActivity(intent);
-            }
-        });
+        loginButton.setReadPermissions("email", "public_profile");
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -209,6 +200,8 @@ public class LoginActivity extends AppCompatActivity {
         }
         else
             Toast.makeText(this, "updating UI for user with Email: " + user.getEmail(), Toast.LENGTH_SHORT ).show();
+            Intent intent = new Intent(this, MapsActivity.class);
+            startActivity(intent);
     }
 
 
@@ -249,7 +242,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void signInUser(String email, String password){
-        if (email!=null&& password!=null && !email.isEmpty() && !email.isEmpty()) {
+
+        if (email!=null&& password!=null && email.length()!=0 && password.length()!=0) {
             showLoading();
             firebaseAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

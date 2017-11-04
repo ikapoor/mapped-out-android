@@ -1,18 +1,23 @@
 package kapoor.ishan.ca.mapapp;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
     private GoogleMap mMap;
+    events event1;
+    events event2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +27,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        event1 = new events("Ball Up", "A friendly game of pickup basketball", 43.6532, -79.3832);
+        event2 = new events("Soccer Game", "A game of soccer", 41.6532, -83.3832);
+
     }
 
 
@@ -37,15 +46,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        plotPoint("Event 1", "Game of pickup basketball", 43.6532, -79.3832);
+        plotPoint(event1);
+        plotPoint(event2);
+
+        // Set a listener for info window events.
+        mMap.setOnInfoWindowClickListener(this);
+    }
+
+    public void plotPoint(events event) {
+        LatLng point = new LatLng(event.getLatitude(), event.getLongitude());
+        mMap.addMarker(new MarkerOptions().position(point).title(event.getName()).snippet(event.getDescription()));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(point));
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Intent myIntent = new Intent(MapsActivity.this,
+                InfoActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("eventName", marker.getTitle());
+        bundle.putString("eventDescription", marker.getSnippet());
+        myIntent.putExtras(bundle);
+        startActivity(myIntent);
 
     }
 
-    public void plotPoint(String name, String description, double latitude, double longitude) {
-        LatLng point = new LatLng(latitude, longitude);
-        mMap.addMarker(new MarkerOptions().position(point).title(name).snippet(description));
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
-
 }
