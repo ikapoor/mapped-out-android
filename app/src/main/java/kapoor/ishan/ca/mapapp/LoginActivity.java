@@ -57,6 +57,8 @@ public class LoginActivity extends AppCompatActivity {
     public static final String TAG = LoginActivity.class.getSimpleName();
     private FirebaseAuth firebaseAuth;
 
+
+    private Button btn;
     LoginButton loginButton;
     public static final String FIELDS_KEY = "fields";
     public static final String FIELDS = "first_name, last_name, email, id";
@@ -75,6 +77,16 @@ public class LoginActivity extends AppCompatActivity {
         nameView = (TextView) findViewById(R.id.name_tv);
         emailView = (TextView) findViewById(R.id.email_tv);
         loginButton.setReadPermissions("email", "public_profile");
+
+        btn = (Button) findViewById(R.id.btn);
+        btn.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
+                startActivity(intent);
+            }
+        });
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
