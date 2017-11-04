@@ -29,7 +29,10 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -39,7 +42,11 @@ import com.facebook.GraphRequestAsyncTask;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,8 +61,15 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity {
 
+    private Button signInButton;
+    private Button RegisterButton;
+    private EditText passwordEditText;
+    private EditText emailEditText;
+    private LinearLayout loginForm;
+    private ProgressBar progressBar;
     public static final String TAG = LoginActivity.class.getSimpleName();
     private FirebaseAuth firebaseAuth;
+    private Button signOutButton;
 
     LoginButton loginButton;
     public static final String FIELDS_KEY = "fields";
@@ -71,9 +85,41 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         loginButton =(LoginButton) findViewById(R.id.login_button);
         firebaseAuth = FirebaseAuth.getInstance();
+        progressBar = (ProgressBar)findViewById(R.id.login_progress);
+        loginForm = (LinearLayout)findViewById(R.id.email_login_form);
         callbackManager = CallbackManager.Factory.create();
         nameView = (TextView) findViewById(R.id.name_tv);
         emailView = (TextView) findViewById(R.id.email_tv);
+        signOutButton = (Button) findViewById(R.id.sign_out_button);
+        signInButton = (Button)findViewById(R.id.sign_in_button);
+        RegisterButton = (Button) findViewById(R.id.register_button);
+        emailEditText = (EditText) findViewById(R.id.email_edit_text);
+        passwordEditText = (EditText)findViewById(R.id.password_edit_text);
+
+        RegisterButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                registerUser(emailEditText.getText().toString(), passwordEditText.getText().toString());
+            }
+        });
+
+        signInButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                signInUser(emailEditText.getText().toString(), passwordEditText.getText().toString());
+            }
+        });
+
+        signOutButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                signOutUser();
+            }
+        });
+
+
+
         loginButton.setReadPermissions("email", "public_profile");
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -135,5 +181,114 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        updateUI(currentUser);
+
+    }
+
+    public void updateUI(FirebaseUser user){
+        if (user == null){
+            Log.d(TAG, "suck a fucking dick");
+        }
+        else
+            Toast.makeText(this, "updating UI for user with Email: " + user.getEmail(), Toast.LENGTH_SHORT ).show();
+    }
+
+
+
+    public void registerUser(String email, String password){
+        if (!email.contains("@")){
+            Toast.makeText(this, "Invalid email", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (password.length()<4){
+            Toast.makeText(this, "Please Enter a longer password", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        showLoading();
+
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            hideLoading();
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            hideLoading();
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
+
+
+    }
+
+    public void signInUser(String email, String password){
+        if (email!=null&& password!=null && !email.isEmpty() && !email.isEmpty()) {
+            showLoading();
+            firebaseAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            hideLoading();
+                            if (task.isSuccessful()) {
+                                hideLoading();
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInWithEmail:success");
+                                FirebaseUser user = firebaseAuth.getCurrentUser();
+                                updateUI(user);
+                            } else {
+                                hideLoading();
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                                updateUI(null);
+                            }
+                        }
+                    });
+        }
+        else {
+            Toast.makeText(LoginActivity.this, "Please Enter an email and a password",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void showLoading(){
+        loginForm.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    public void hideLoading(){
+
+        progressBar.setVisibility(View.GONE);
+        loginForm.setVisibility(View.VISIBLE);
+    }
+
+    public void signOutUser(){
+        if (firebaseAuth!=null){
+            if (firebaseAuth.getCurrentUser()!=null){
+                String user = firebaseAuth.getCurrentUser().getEmail();
+                firebaseAuth.signOut();
+                Toast.makeText(this, user + " has been signed out", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
 }
 
