@@ -30,6 +30,38 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <EditText
+                android:id="@+id/email_edit_text"
+                android:hint="Email"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/password_edit_text"
+                android:hint="password"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:text="Sign in"
+                android:id="@+id/sign_in_button"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorPrimary"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/register_button"
+                android:text="Register"
+                android:background="@color/colorPrimary"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
 
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/login_button"
@@ -44,6 +76,7 @@
                 android:textStyle="bold"
                 android:padding="10dp"
                 android:id="@+id/name_tv"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
