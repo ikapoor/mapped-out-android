@@ -7,54 +7,70 @@ import android.os.Parcelable;
  * Created by Aaditya on 2017-11-04.
  */
 
-public class events implements Parcelable{
-    String name;
-    String description;
-    double latitude;
-    double longitude;
+public class events {
+    private String name;
+    private String description;
+    private double latitude;
+    private double longitude;
+    private String date;
+    private String time;
+    private String id;
 
-    public events(Parcel in){
-        name = in.readString();
-        description = in.readString();
-        latitude = in.readDouble();
-        longitude = in.readDouble();
+    public events(){
+
     }
 
-    public events(String name, String description, double latitude, double longitude) {
+
+
+    public events(String name, String description, double latitude, double longitude, String Date, String Time) {
         this.name = name;
         this.description = description;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.date = Date;
+        this.time = Time;
     }
 
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setName(String Name) {
+        this.name = Name;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
-        parcel.writeString(name);
-        parcel.writeString(description);
-        parcel.writeDouble(longitude);
-        parcel.writeDouble(latitude);
+    public void setDescription(String DEscription) {
+        this.description = DEscription;
     }
 
-    public static final Parcelable.Creator<events> CREATOR = new Parcelable.Creator<events>(){
+    public void setLatitude(double LAtitude) {
+        this.latitude = LAtitude;
+    }
 
-        public events createFromParcel(Parcel in){
-            return new events(in);
-        }
+    public void setLongitude(double LOngitude) {
+        this.longitude = LOngitude;
+    }
 
-        public events[] newArray(int size){
+    public String getDate() {
+        return date;
+    }
 
-            return new events[size];
-        }
+    public void setDate(String Daate) {
+        this.date = Daate;
+    }
 
+    public String getTime() {
+        return time;
+    }
 
-    };
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
