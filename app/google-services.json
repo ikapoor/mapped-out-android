@@ -1,0 +1,86 @@
+{
+  "project_info": {
+    "project_number": "145866489357",
+    "firebase_url": "https://mappedout-bb4db.firebaseio.com",
+    "project_id": "mappedout-bb4db",
+    "storage_bucket": "mappedout-bb4db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:145866489357:android:8c059e1ae195f1f3",
+        "android_client_info": {
+          "package_name": "kapoor.ishan.mapapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "145866489357-hfq9padca6tblakkp50ua1tfbv6427v3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfBtolUAXUhdTYP2cYR_XjjF7HnbLtofw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:145866489357:android:ed75857686d7c839",
+        "android_client_info": {
+          "package_name": "kapoor.ishan.mapapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "145866489357-mslonertnk438nejvto2qag14v9le3rs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kapoor.ishan.mapapp",
+            "certificate_hash": "f8e3f8b64ad04b875268b10d5fbfc0bfc9ed2922"
+          }
+        },
+        {
+          "client_id": "145866489357-hfq9padca6tblakkp50ua1tfbv6427v3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfBtolUAXUhdTYP2cYR_XjjF7HnbLtofw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "145866489357-hfq9padca6tblakkp50ua1tfbv6427v3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
