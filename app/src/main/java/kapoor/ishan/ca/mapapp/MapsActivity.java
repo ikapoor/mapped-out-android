@@ -182,6 +182,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 bundle.putDouble("latitude", events.getLatitude());
                 bundle.putDouble("longitude", events.getLongitude());
                 bundle.putString("id", events.getId());
+                bundle.putString("date", events.getDate());
+                bundle.putString("time", events.getTime());
 
             }
         }

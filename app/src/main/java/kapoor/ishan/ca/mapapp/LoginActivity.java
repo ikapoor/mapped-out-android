@@ -163,7 +163,6 @@ public class LoginActivity extends AppCompatActivity {
 
         }
         else {
-            Toast.makeText(this, "updating UI for user with Email: " + user.getEmail(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MapsActivity.class);
             startActivity(intent);
         }

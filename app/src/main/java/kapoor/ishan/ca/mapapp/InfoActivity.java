@@ -30,6 +30,8 @@ public class InfoActivity extends AppCompatActivity {
     Button directionBtn;
     String eventId;
     ListView listView;
+    String date, time;
+    TextView when, where;
 
     usersAdapter adapter;
     double latitude;
@@ -47,6 +49,7 @@ public class InfoActivity extends AppCompatActivity {
         description = (TextView) findViewById(R.id.desc);
         Bundle bundle = getIntent().getExtras();
         listView = (ListView) findViewById(R.id.list_view);
+        when = (TextView) findViewById(R.id.when);
         adapter = new usersAdapter(this, R.layout.list_item_user, users);
         listView.setAdapter(adapter);
         eventId = bundle.getString("id");
@@ -55,6 +58,7 @@ public class InfoActivity extends AppCompatActivity {
 
         name.setText(bundle.getString("eventName"));
         description.setText(bundle.getString("eventDescription"));
+        when.setText(bundle.getString("date") + ", " + bundle.getString("time"));
 
         databaseEventUser = FirebaseDatabase.getInstance().getReference("user-events").child(eventId);
 
