@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -69,9 +70,9 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     public static final String TAG = LoginActivity.class.getSimpleName();
     private FirebaseAuth firebaseAuth;
-    private Button signOutButton;
 
-    LoginButton loginButton;
+
+
     public static final String FIELDS_KEY = "fields";
     public static final String FIELDS = "first_name, last_name, email, id";
 
@@ -83,18 +84,18 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        loginButton =(LoginButton) findViewById(R.id.login_button);
         firebaseAuth = FirebaseAuth.getInstance();
         progressBar = (ProgressBar)findViewById(R.id.login_progress);
         loginForm = (LinearLayout)findViewById(R.id.email_login_form);
         callbackManager = CallbackManager.Factory.create();
         nameView = (TextView) findViewById(R.id.name_tv);
         emailView = (TextView) findViewById(R.id.email_tv);
-        signOutButton = (Button) findViewById(R.id.sign_out_button);
         signInButton = (Button)findViewById(R.id.sign_in_button);
         RegisterButton = (Button) findViewById(R.id.register_button);
         emailEditText = (EditText) findViewById(R.id.email_edit_text);
         passwordEditText = (EditText)findViewById(R.id.password_edit_text);
+
+
 
         RegisterButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -110,51 +111,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        signOutButton.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                signOutUser();
-            }
-        });
 
 
 
-        loginButton.setReadPermissions("email", "public_profile");
 
 
-        loginButton.setReadPermissions("email", "public_profile");
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                String userID = loginResult.getAccessToken().getUserId();
-                GraphRequest graphRequest = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(JSONObject object, GraphResponse response) {
-                        displayUserInfo(object);
-                        Log.d(TAG, "onCompleted");
-                        Log.d(TAG, object.toString());
-                    }
-                });
 
-                Bundle parameters = new Bundle();
-                parameters.putString(FIELDS_KEY, FIELDS );
-                graphRequest.setParameters(parameters);
-                graphRequest.executeAsync();
 
-            }
 
-            @Override
-            public void onCancel() {
-
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Log.d(TAG, error.getMessage());
-
-            }
-        });
     }
 
     private void displayUserInfo(JSONObject object) {

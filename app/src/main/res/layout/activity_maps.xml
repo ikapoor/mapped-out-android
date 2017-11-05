@@ -22,25 +22,28 @@
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="top|right"
                 android:layout_margin="16dp"
-                app:elevation="4dp"
                 android:background="@color/colorPrimary"
                 android:src="@drawable/ic_add_black_24dp"
-                app:rippleColor="@color/colorPrimary"
-                app:backgroundTint="@color/colorPrimary"
-                app:layout_anchorGravity="bottom|right|end" />
+                app:backgroundTint="@color/colorPrimaryDark"
+                app:elevation="4dp"
+                app:layout_anchorGravity="bottom|right|end"
+                app:rippleColor="@color/colorPrimaryDark" />
+
             <Button
                 android:id="@+id/log_out_btn"
-                android:layout_gravity="top|left"
-                android:layout_margin="16dp"
-                android:background="@color/colorPrimary"
-                app:layout_anchorGravity="bottom|left|start"
-                android:text="Log out"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="top|right"
+                android:layout_marginRight="15dp"
+                android:layout_marginVertical="90dp"
+                android:background="@drawable/roundbutton"
+                android:text="←"
+                android:textSize="30sp"
+                app:layout_anchorGravity="bottom|left|start" />
         </FrameLayout>
 
     </LinearLayout>
