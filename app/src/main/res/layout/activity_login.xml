@@ -11,6 +11,12 @@
     android:background="@drawable/login_background"
     tools:context="kapoor.ishan.ca.mapapp.LoginActivity">
 
+    <ImageView
+
+        android:src="@drawable/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp" />
+
     <!-- Login progress -->
     <ProgressBar
         android:id="@+id/login_progress"
@@ -32,8 +38,8 @@
             android:layout_height="wrap_content"
             android:hint="Email"
             android:padding="12dp"
-            android:layout_marginTop="200dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/roundedbutton"/>
 
         <EditText
@@ -51,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/roundedbutton"
             android:text="Sign in"
             android:textColor="#FFFFFF"/>

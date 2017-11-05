@@ -1,6 +1,8 @@
 package kapoor.ishan.ca.mapapp;
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,7 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class InfoActivity extends AppCompatActivity {
@@ -50,11 +54,34 @@ public class InfoActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         listView = (ListView) findViewById(R.id.list_view);
         when = (TextView) findViewById(R.id.when);
+        where = (TextView) findViewById(R.id.where);
         adapter = new usersAdapter(this, R.layout.list_item_user, users);
         listView.setAdapter(adapter);
         eventId = bundle.getString("id");
         latitude = bundle.getDouble("latitude");
         longitude = bundle.getDouble("longitude");
+
+        Geocoder geocoder = new Geocoder(this);
+        List<Address> list = new ArrayList<>();
+        try {
+            list = geocoder.getFromLocation(latitude, longitude, 40);
+            Address address = list.get(0);
+            if (address.getAddressLine(0)!=null)
+                where.setText(address.getAddressLine(0));
+            else
+                where.setText(address.getFeatureName() + " " + list.get(1).getFeatureName());
+
+        } catch (IOException e) {
+            TextView lkflk = ((TextView)findViewById(R.id.whereLabel));
+            lkflk.setVisibility(View.GONE);
+            where.setVisibility(View.GONE);
+            e.printStackTrace();
+            list.add(new Address(getResources().getConfiguration().locale));
+
+        }
+
+
+
 
         name.setText(bundle.getString("eventName"));
         description.setText(bundle.getString("eventDescription"));

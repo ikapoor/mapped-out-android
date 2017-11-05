@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MapApp</string>
+    <string name="app_name">mAPPed Out</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
