@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/login_background"
     tools:context="kapoor.ishan.ca.mapapp.LoginActivity">
 
     <!-- Login progress -->
@@ -19,82 +20,71 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
-        <LinearLayout
-            android:id="@+id/email_login_form"
+    <LinearLayout
+        android:id="@+id/email_login_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/email_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:hint="Email"
+            android:padding="12dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/roundedbutton"/>
 
-            <EditText
-                android:id="@+id/email_edit_text"
-                android:hint="Email"
-                android:padding="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/password_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:background="@drawable/roundedbutton"/>
 
-            <EditText
-                android:inputType="textPassword"
-                android:id="@+id/password_edit_text"
-                android:hint="Password"
-                android:padding="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:text="Sign in"
-                android:id="@+id/sign_in_button"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/colorPrimary"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/register_button"
-                android:text="Register"
-                android:background="@color/colorPrimary"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="150dp"
+            android:background="@drawable/roundedbutton"
+            android:text="Sign in"
+            android:textColor="#FFFFFF"/>
 
 
-            <Button
-                android:text="Sign out"
-                android:id="@+id/sign_out_button"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/colorPrimary"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <com.facebook.login.widget.LoginButton
-                android:id="@+id/login_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp" />
-
-            <TextView
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:padding="10dp"
-                android:id="@+id/name_tv"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:padding="10dp"
-                android:id="@+id/email_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/register_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/roundedoutlinebtn"
+            android:textColor="#FFFFFF"
+            android:text="Register" />
 
 
-        </LinearLayout>
+
+        <TextView
+            android:id="@+id/name_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/email_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
 
 </LinearLayout>

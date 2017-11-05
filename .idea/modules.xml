@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MapApp.iml" filepath="$PROJECT_DIR$/MapApp.iml" />
+      <module fileurl="file://C:\Users\Aaditya\Desktop\mappedout\mapped-out\MapApp.iml" filepath="C:\Users\Aaditya\Desktop\mappedout\mapped-out\MapApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mapped-out.iml" filepath="$PROJECT_DIR$/mapped-out.iml" />
     </modules>
   </component>
 </project>
