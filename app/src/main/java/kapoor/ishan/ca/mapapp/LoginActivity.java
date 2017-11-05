@@ -160,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void updateUI(FirebaseUser user){
         if (user == null){
-            Log.d(TAG, "suck a fucking dick");
+
         }
         else {
             Toast.makeText(this, "updating UI for user with Email: " + user.getEmail(), Toast.LENGTH_SHORT).show();

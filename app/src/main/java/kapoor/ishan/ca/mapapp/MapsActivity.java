@@ -31,6 +31,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +87,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onDataChange(DataSnapshot dataSnapshot) {
                 eventlist.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-
                     events event = snapshot.getValue(events.class);
                     eventlist.add(event);
                     plotPoint(event);
@@ -119,7 +121,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(MapsActivity.this, "never mind B", Toast.LENGTH_SHORT).show();
                     }
                 });
         AlertDialog alertDialog = builder.create();
@@ -128,12 +129,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    private void createEvent(events events) {
+    private void createEvent(events events){
         Log.d(TAG, Double.toString(events.getLatitude()) + " " + Double.valueOf(events.getLongitude()));
 
         String id = databaseEvents.push().getKey();
         events.setId(id);
         databaseEvents.child(id).setValue(events);
+        String k =  FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        String newID = databaseUserEvents.push().getKey();
+        databaseUserEvents.child(id).child(newID).setValue(k.substring(0, k.indexOf("@")));
+
 
 
     }
@@ -176,6 +181,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 events currEvent = events;
                 bundle.putDouble("latitude", events.getLatitude());
                 bundle.putDouble("longitude", events.getLongitude());
+                bundle.putString("id", events.getId());
 
             }
         }
