@@ -24,7 +24,7 @@
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
+                android:layout_gravity="top|right"
                 android:layout_margin="16dp"
                 app:elevation="4dp"
                 android:background="@color/colorPrimary"
@@ -34,7 +34,7 @@
                 app:layout_anchorGravity="bottom|right|end" />
             <Button
                 android:id="@+id/log_out_btn"
-                android:layout_gravity="bottom|left"
+                android:layout_gravity="top|left"
                 android:layout_margin="16dp"
                 android:background="@color/colorPrimary"
                 app:layout_anchorGravity="bottom|left|start"

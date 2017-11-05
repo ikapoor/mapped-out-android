@@ -136,7 +136,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         databaseEvents.child(id).setValue(events);
 
 
-
     }
 
 
@@ -170,6 +169,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Bundle bundle = new Bundle();
         bundle.putString("eventName", marker.getTitle());
         bundle.putString("eventDescription", marker.getSnippet());
+
+        for(events events: eventlist){
+
+            if (events.getName().equalsIgnoreCase(marker.getTitle())){
+                events currEvent = events;
+                bundle.putDouble("latitude", events.getLatitude());
+                bundle.putDouble("longitude", events.getLongitude());
+
+            }
+        }
         myIntent.putExtras(bundle);
         startActivity(myIntent);
 
@@ -202,4 +211,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         return p1;
     }
+
+
 }
